@@ -177,6 +177,20 @@ screen countdown:
         # ^This is the timer bar.
 
 label start:
+
+    "Before the game starts, we would like to show you the color code that can help you access the lessons
+    for both Senior High School and College easily."
+
+    show ColorCode
+
+    window hide
+
+    pause
+
+    hide ColorCode
+
+    "Thank you for seeing the color code. Have fun playing!"
+
     #This is for inputting the player name of your choice
     python:
         playername=renpy.input("Please enter the protagonist's name: ", length=32)
@@ -218,8 +232,6 @@ label start:
             the game will proceed so good luck and have fun."
 
             hide MrPopQuiz
-
-            hide chalkboard
 
             jump Question1PopQuizSHS
 
@@ -528,6 +540,8 @@ label start:
         "Congratulations, player. Out of 5 questions, you answered {b}[scorepopquiz]{/b} questions. Enjoy playing
         the rest of the game. Good luck and have fun!"
 
+        hide screen countdown
+
         jump shs
 
     return
@@ -590,7 +604,7 @@ label start:
         hide screen countdown
         play sound "audio/Wrong Answer sfx.mp3"
         "Your answer is incorrect. The correct answer is {b}D. him{/b}. You may now proceed to Question no. 2."
-        $ score +=0
+        $ scorepopquiz +=0
         stop sound
         stop music
         jump Question2PopQuizCollege
@@ -601,7 +615,7 @@ label start:
         hide screen countdown
         play sound "audio/Correct Answer sfx.mp3"
         "Your answer is correct! You may now proceed to Question no. 2."
-        $ score +=1
+        $ scorepopquiz +=1
         stop sound
         stop music
         jump Question2PopQuizCollege
@@ -610,7 +624,7 @@ label start:
     label question1popquizcollege_slow:
         play sound "audio/Time Distortion sfx.mp3"
         "Unfortunately, you ran out of time. The correct answer is {b}D. him{/b}. You may now proceed to Question no. 2."
-        $ score +=0
+        $ scorepopquiz +=0
         stop sound
         stop music
         jump Question2PopQuizCollege
@@ -649,7 +663,7 @@ label start:
         hide screen countdown
         play sound "audio/Correct Answer sfx.mp3"
         "Your answer is correct! You may now proceed to Question no. 3."
-        $ score +=1
+        $ scorepopquiz +=1
         stop sound
         stop music
         jump Question3PopQuizCollege
@@ -660,7 +674,7 @@ label start:
         hide screen countdown
         play sound "audio/Wrong Answer sfx.mp3"
         "Your answer is incorrect. The correct answer is {b}A. True{/b}. You may now proceed to Question no. 3."
-        $ score +=0
+        $ scorepopquiz +=0
         stop sound
         stop music
         jump Question3PopQuizCollege
@@ -670,7 +684,7 @@ label start:
     label question2popquizcollege_slow:
         play sound "audio/Time Distortion sfx.mp3"
         "Unfortunately, you ran out of time. The correct answer is {b}A. True{/b}. You may now proceed to Question no. 3."
-        $ score +=0
+        $ scorepopquiz +=0
         stop sound
         stop music
         jump Question3PopQuizCollege
@@ -708,7 +722,7 @@ label start:
         hide screen countdown
         play sound "audio/Wrong Answer sfx.mp3"
         "Your answer is incorrect. The correct answer is {b}C. Pride and Prejudice{/b}. You may now proceed to Question no. 4."
-        $ score +=0
+        $ scorepopquiz +=0
         stop sound
         stop music
         jump Question4PopQuizCollege
@@ -719,7 +733,7 @@ label start:
         hide screen countdown
         play sound "audio/Correct Answer sfx.mp3"
         "Your answer is correct! You may now proceed to Question no. 4."
-        $ score +=1
+        $ scorepopquiz +=1
         stop sound
         stop music
         jump Question4PopQuizCollege
@@ -730,7 +744,7 @@ label start:
         play sound "audio/Time Distortion sfx.mp3"
         "Unfortunately, you ran out of time. The correct answer is {b}C. Pride and Prejudice{/b}.
         You may now proceed to Question no. 4."
-        $ score +=0
+        $ scorepopquiz +=0
         stop sound
         stop music
         jump Question4PopQuizCollege
@@ -767,7 +781,7 @@ label start:
         hide screen countdown
         play sound "audio/Wrong Answer sfx.mp3"
         "Your answer is incorrect. The correct answer is {b}B. Deuteronomy{/b}. You may now proceed to Question no. 5."
-        $ score +=0
+        $ scorepopquiz +=0
         stop sound
         stop music
         jump Question5PopQuizCollege
@@ -777,7 +791,7 @@ label start:
         hide screen countdown
         play sound "audio/Correct Answer sfx.mp3"
         "Your answer is correct! You may now proceed to Question no. 5."
-        $ score +=1
+        $ scorepopquiz +=1
         stop sound
         stop music
         jump Question5PopQuizCollege
@@ -786,7 +800,7 @@ label start:
     label question4popquizcollege_slow:
         play sound "audio/Time Distortion sfx.mp3"
         "Unfortunately, you ran out of time. The correct answer is {b}B. Deuteronomy{/b}. You may now proceed to Question no. 4."
-        $ score +=0
+        $ scorepopquiz +=0
         stop sound
         stop music
         jump Question5PopQuizCollege
@@ -826,7 +840,7 @@ label start:
         play sound "audio/Wrong Answer sfx.mp3"
         "Your answer is incorrect. The correct answer is {b}D. My Struggle{/b}.
         And this is the end of the pop quiz, let us now see the results."
-        $ score +=0
+        $ scorepopquiz +=0
         stop sound
         stop music
         jump ResultsPopQuizCollege
@@ -837,7 +851,7 @@ label start:
         play sound "audio/Correct Answer sfx.mp3"
         "Your answer is correct! And this is the end of the pop quiz, let us
         now see the results."
-        $ score +=1
+        $ scorepopquiz +=1
         stop sound
         stop music
         jump ResultsPopQuizCollege
@@ -847,15 +861,17 @@ label start:
         play sound "audio/Time Distortion sfx.mp3"
         "Unfortunately, you ran out of time. The correct answer is {b}D. My Struggle{/b}.
         And this is the end of the pop quiz, let us now see the results."
-        $ score +=0
+        $ scorepopquiz +=0
         stop sound
         stop music
         jump ResultsPopQuizCollege
     return
 
     label ResultsPopQuizCollege:
-        "Congratulations, player. Out of 5 questions, you answered {b}[score]{/b} questions. Enjoy playing
+        "Congratulations, player. Out of 5 questions, you answered {b}[scorepopquiz]{/b} questions. Enjoy playing
         the rest of the game. Good luck and have fun!"
+
+        hide screen countdown
 
         jump college
 
@@ -1010,8 +1026,6 @@ label start:
         hide black
 
         jump classroomSHS
-
-        jump campusSHS
 
     return
 
@@ -3309,7 +3323,7 @@ label start:
         $ timer_jump = 'question10shs_slow2'                    ### set where you want to jump once the timer runs out
 
 
-        Question1SHS "It involves reading with a purpose in order to grasp definitions and meanings, understand debates, and identify and interpret evidence."
+        Question10SHS "It involves reading with a purpose in order to grasp definitions and meanings, understand debates, and identify and interpret evidence."
         jump q10shs2
     return
 
@@ -6349,7 +6363,7 @@ label start:
             "A. Introduction":
                 jump L2correctanswercollege6
             "B. The body of the paper ":
-                jump L2wronganswercollege6
+                jump L2correctanswercollege6
             "C. Conclusion":
                 jump L2wronganswercollege6
             "D. None of the above":
@@ -6378,7 +6392,7 @@ label start:
         jump Question7CollegeL2
     return
 
-    label question6college_slow2:
+    label question6college_slowL2:
         play sound "audio/Time Distortion sfx.mp3"
         "Unfortunately, you ran out of time. The correct answer is {b}B. The body of the paper{/b}.
         You may now proceed to Question no. 7."
@@ -6405,11 +6419,11 @@ label start:
         menu:
 
             "A. Introduction":
-                jump L2correctanswercollege7
+                jump L2wronganswercollege7
             "B. Conclusions  ":
                 jump L2wronganswercollege7
             "C. Selecting a Topic ":
-                jump L2wronganswercollege7
+                jump L2correctanswercollege7
             "D. The Body of the paper":
                 jump L2wronganswercollege7
 
@@ -6464,11 +6478,11 @@ label start:
         menu:
 
             "A. One (1)":
-                jump L2correctanswercollege8
+                jump L2wronganswercollege8
             "B. Two (2)":
                 jump L2wronganswercollege8
             "C. Three (3)":
-                jump L2wronganswercollege8
+                jump L2correctanswercollege8
             "D. Four (4)":
                 jump L2wronganswercollege8
 
@@ -7019,13 +7033,13 @@ label start:
         menu:
 
                 "A. True":
-                    call L3wronganswercollege4
+                    call L3correctanswercollege4
                 "B. False":
                     call L3wronganswercollege4
                 "C. Maybe":
                     call L3wronganswercollege4
                 "D. No Idea":
-                    call L3correctanswercollege4
+                    call L3wronganswercollege4
 
         return
 
